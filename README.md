@@ -8,3 +8,6 @@ Directory Layout
 
 * Zeek-Standalone - Zeek as an executable docker container **for creating packet flow data from one or multiple pre-captured pcap**
 * *NYI* Zeek-Capture - Zeek as an executable docker container **for capturing packets from a connected physical or virtual interface**
+
+More information about Zeek here:
+* https://zeek.org/
