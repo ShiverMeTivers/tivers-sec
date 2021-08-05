@@ -1,0 +1,15 @@
+version: "3.4"
+services:
+  zeek-capture:
+    container_name: zeek-capture
+    build: ./zeek_capture_host/. 
+    image: zeek-capture
+    env_file: zeek_capture.env
+    network_mode: "host"
+    cap_add: 
+      - NET_ADMIN
+    volumes:
+      - type: bind
+        source: ${PWD}/logs
+        target: /opt/zeek/logs
+
