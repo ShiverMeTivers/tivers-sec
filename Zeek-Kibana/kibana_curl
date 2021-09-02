@@ -1,0 +1,4 @@
+curl -X POST localhost:5601/api/saved_objects/index-pattern/filebeat*  -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d '{"attributes": {"title": "filebeat*","timefieldname": "@timestamp"}}'
+
+
+curl -X PUT localhost:5601/api/saved_objects/config/7.14.0 -H 'kbn-xsrf: true' -H 'Content-Type: application/json' -d '{"attributes":{"securitySolution:defaultIndex":["filebeat*"]}}'

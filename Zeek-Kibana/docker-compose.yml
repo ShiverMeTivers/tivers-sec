@@ -12,6 +12,7 @@ services:
       - type: bind
         source: ${PWD}/logs
         target: /opt/zeek/logs
+    command: ["1"]
         
   elastic:
     container_name: elasticsearch
