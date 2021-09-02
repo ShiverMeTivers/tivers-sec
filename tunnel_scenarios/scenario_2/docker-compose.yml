@@ -1,0 +1,91 @@
+version: "3.4"
+services:
+  pivot-1:
+    container_name: pivot-1
+    build: ./pivot/. 
+    image: pivot
+    networks:
+      - tn1
+
+  pivot-2:
+    container_name: pivot-2
+    build: ./pivot/. 
+    image: pivot
+    networks:
+      tn2:
+        ipv4_address: 172.16.2.2
+
+  pivot-3:
+    container_name: pivot-3
+    build: ./pivot/. 
+    image: pivot
+    networks:
+      - tn3
+
+  pivot-4:
+    container_name: pivot-4
+    build: ./pivot/. 
+    image: pivot
+    networks:
+      - tn4
+
+  pivot-5:
+    container_name: pivot-5
+    build: ./pivot/. 
+    image: pivot
+    networks:
+      - tn5
+
+  pivot-6:
+    container_name: pivot-6
+    build: ./pivot/. 
+    image: pivot
+    networks:
+      - tn6
+
+
+networks:
+  tn1:
+    driver: bridge
+    ipam:
+      driver : default
+      config:
+        - subnet: 172.16.1.0/24
+
+
+  tn2:
+    driver: bridge
+    ipam:
+      driver : default
+      config:
+        - subnet: 172.16.2.0/24
+
+
+  tn3:
+    driver: bridge
+    ipam:
+      driver : default
+      config:
+        - subnet: 172.16.3.0/24
+
+  tn4:
+    driver: bridge
+    ipam:
+      driver : default
+      config:
+        - subnet: 172.16.4.0/24
+
+  tn5:
+    driver: bridge
+    ipam:
+      driver : default
+      config:
+        - subnet: 172.16.5.0/24
+
+  tn6:
+    driver: bridge
+    ipam:
+      driver : default
+      config:
+        - subnet: 172.16.6.0/24
+
