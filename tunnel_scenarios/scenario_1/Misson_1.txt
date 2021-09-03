@@ -21,3 +21,12 @@ Misson Failure if:
 3. You are not allowed to privelege escalate at any point, for any reason.
 4. You are not allowed to use /dev/tcp
 
+Instructions:
+1. Install docker engine and command line interface in Windows or Linux
+   - https://docs.docker.com/engine/install/
+2. Execute the script "scenario_1.sh" with one of the following arguments:
+   - up : Downloads and builds images, creates networks, and sets firewall rules for the environment on the local machine
+   - down : Removes networks and containers from the local machine.
+   
+Note: Every time "scenario_1.sh" is executed with "up" the IP addresses and Ports are randomized. Have fun! 
+
