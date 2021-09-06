@@ -38,11 +38,11 @@ up)
 	done
 
 	#Block SSH from the local machine to anything but 172.16.1.1 (Localhost)
-	sudo iptables -I OUTPUT -p tcp --dport 22 -s 172.16.2.0/24 -d 172.16.2.0/24 -j DROP
-	sudo iptables -I OUTPUT -p tcp --dport 22 -s 172.16.3.0/24 -d 172.16.3.0/24 -j DROP
-	sudo iptables -I OUTPUT -p tcp --dport 22 -s 172.16.4.0/24 -d 172.16.4.0/24 -j DROP
-	sudo iptables -I OUTPUT -p tcp --dport 22 -s 172.16.5.0/24 -d 172.16.5.0/24 -j DROP
-	sudo iptables -I OUTPUT -p tcp --dport 22 -s 172.16.6.0/24 -d 172.16.6.0/24 -j DROP
+	sudo iptables -I OUTPUT -p tcp --dport $P2PORT -s 172.16.2.0/24 -d 172.16.2.0/24 -j DROP
+	sudo iptables -I OUTPUT -p tcp --dport $P3PORT -s 172.16.3.0/24 -d 172.16.3.0/24 -j DROP
+	sudo iptables -I OUTPUT -p tcp --dport $P4PORT -s 172.16.4.0/24 -d 172.16.4.0/24 -j DROP
+	sudo iptables -I OUTPUT -p tcp --dport $P5PORT -s 172.16.5.0/24 -d 172.16.5.0/24 -j DROP
+	sudo iptables -I OUTPUT -p tcp --dport $P6PORT -s 172.16.6.0/24 -d 172.16.6.0/24 -j DROP
 	sudo iptables -I OUTPUT -p tcp --dport 22 -s 172.16.1.1 -d 172.16.1.2 -j ACCEPT
 
 	#Flush Masqurade rules from iptables POSTROUTING chain so auth.log/wtmp/lastlog output will be correct
@@ -55,7 +55,21 @@ up)
 down)
 	#Bring down the docker container
 	echo "Bringing the scenario down"
+	
+	#Bring down Containers
 	docker-compose down
+	
+	#FLush Created Rules in OUTPUT CHAIN
+	iptables -F OUTPUT
+	
+	#Remove 10 created rules from Docker User
+	for i in $(seq 10); do
+                iptables -D DOCKER-USER 1
+        done
+
+	#Restart docker.service #Note: Do I reallly need to do this?
+	systemctl restart docker.service
+
 	;;
 *)
 	cat << EOF
