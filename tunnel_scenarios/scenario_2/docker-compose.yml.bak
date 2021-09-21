@@ -35,50 +35,6 @@ services:
     volumes:
         - "./pivot/limits.conf:/etc/security/limits.conf"
 
-  target-1:
-    container_name: target-1
-    build: 
-      context: ./target/.
-      args:
-        ports: ${tgt1port}
-    image: target-1
-    networks:
-      tn3:
-        ipv4_address: 172.16.3.${tgt1}
-
-  target-2:
-    container_name: target-2
-    build: 
-      context: ./target/.
-      args:
-        ports: ${tgt2port}
-    image: target-2
-    networks:
-      tn3:
-        ipv4_address: 172.16.3.${tgt2}
-
-  target-3:
-    container_name: target-3
-    build: 
-      context: ./target/.
-      args:
-        ports: ${tgt3port}
-    image: target-3
-    networks:
-      tn3:
-        ipv4_address: 172.16.3.${tgt3}
-
-  target-4:
-    container_name: target-4
-    build: 
-      context: ./target/.
-      args:
-        ports: ${tgt4port}
-    image: target-4
-    networks:
-      tn3:
-        ipv4_address: 172.16.3.${tgt4}
-
   pivot-4:
     container_name: pivot-4
     build: 

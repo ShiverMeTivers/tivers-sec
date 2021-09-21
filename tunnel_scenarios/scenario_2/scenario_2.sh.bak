@@ -8,18 +8,12 @@ fi
 case $1 in
 up)
 
-    	#Randomize SSH pivot ports
+    #Randomize SSH ports
 	export P2PORT=$(( ($RANDOM % 65535) + 1000))
 	export P3PORT=$(( ($RANDOM % 65535) + 1000))
 	export P4PORT=$(( ($RANDOM % 65535) + 1000))
 	export P5PORT=$(( ($RANDOM % 65535) + 1000))
 	export P6PORT=$(( ($RANDOM % 65535) + 1000))
-
-    	#Randomize SSH target ports
-	export tgt1port=$(( ($RANDOM % 65535) + 1000))
-	export tgt2port=$(( ($RANDOM % 65535) + 1000))
-	export tgt3port=$(( ($RANDOM % 65535) + 1000))
-	export tgt4port=$(( ($RANDOM % 65535) + 1000))
 	
 	#Randomize pivot ips
 	export ip2=$(( ($RANDOM % 249) + 4))
@@ -27,12 +21,6 @@ up)
 	export ip4=$(( ($RANDOM % 249) + 4))
 	export ip5=$(( ($RANDOM % 249) + 4))
 	export ip6=$(( ($RANDOM % 249) + 4))
-
-	#Randomize target ips
-	export tgt1=$(( ($RANDOM % 249) + 4))
-	export tgt2=$(( ($RANDOM % 249) + 4))
-	export tgt3=$(( ($RANDOM % 249) + 4))
-	export tgt4=$(( ($RANDOM % 249) + 4))
 	
 	#Rebuild Images with random ports
 	docker-compose build > /dev/null
