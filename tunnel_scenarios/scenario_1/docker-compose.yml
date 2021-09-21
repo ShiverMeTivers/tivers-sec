@@ -32,6 +32,8 @@ services:
     networks:
       tn3:
         ipv4_address: 172.16.3.${ip3}
+    volumes:
+        - "./pivot/limits.conf:/etc/security/limits.conf"
 
   pivot-4:
     container_name: pivot-4
