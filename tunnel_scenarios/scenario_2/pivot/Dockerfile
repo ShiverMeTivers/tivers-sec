@@ -8,9 +8,9 @@ RUN apt update && apt install openssh-server sudo -y
 RUN apt install iproute2 net-tools rsyslog -y
 RUN apt install iputils-ping -y
 ARG ports
-RUN sed -i "s/#Port 22/Port $ports/g" /etc/ssh/sshd_config
+#RUN sed -i "s/#Port 22/Port $ports/g" /etc/ssh/sshd_config
 #Infinite process to keep container running. It starts sshd as a service and pauses.
-RUN echo -e '#!/bin/bash\nservice rsyslog start\n\nservice ssh start\nwhile true; do\n sleep 60\ndone' > /root/startup.sh \
+RUN echo -e '#!/bin/bash\nsed -i "s/#Port 22/Port ${SSH_PORT}/g" /etc/ssh/sshd_config\nservice rsyslog start\n\nservice ssh start\nwhile true; do\n sleep 60\ndone' > /root/startup.sh \
     && chmod ug+x /root/startup.sh
 
 #Runs the script to start the machine
