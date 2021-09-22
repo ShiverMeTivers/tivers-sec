@@ -1,25 +1,35 @@
 Mission:
 
-Use Perform an Nmap port scan of the target 172.16.6.2.
+Enable future missions by creating Master Mode Sockets on <P3> and <P5> to thier repspective target sets.
+All forwarded ports must be accessible on <P1>
 
 Scheme of Maneuver:
 <Start>Linux/Windows Operations Station:
 -<P1>172.16.1.2
 --<P2>172.16.2.X
 ---<P3>172.16.3.X
+---<T1>172.16.3.X
+---<T2>172.16.3.X
+---<T3>172.16.3.X
+---<T4>172.16.3.X
 ----<P4>172.16.4.X
 -----<P5>172.16.5.X 
-------<T1>172.16.6.X
+-----<T5>172.16.5.X 
+-----<T6>172.16.5.X 
+-----<T7>172.16.5.X 
+
 
 Credentials:
 - test:testpassword
 
 Misson Failure if:
 
-1. Connections are detected from the interface of the Linux/Windows Operations Station
-2. You are not allowed to upload tools to any pivot. All tools must be tunnelled from the Operations Station.
-3. You are not allowed to privelege escalate at any point, for any reason.
-4. You are not allowed to use /dev/tcp
+1. You are not allowed to upload tools to any pivot. All tools must be tunnelled from the Operations Station.
+2. You are not allowed to privelege escalate at any point, for any reason.
+3. You are not allowed to use /dev/tcp
+4. More than one ssh session is detected on <P3> or <P5>.
+5. Any account is used other than test
+6. All port forwards must be created on <P1>; No other pivot is allowed forwarded ports.
 
 Instructions:
 1. Install docker engine and command line interface in Windows or Linux
@@ -28,5 +38,7 @@ Instructions:
    - up : Downloads and builds images, creates networks, and sets firewall rules for the environment on the local machine
    - down : Removes networks and containers from the local machine.
    
-Note: Every time "scenario_1.sh" is executed with "up" the IP addresses and Ports are randomized. Have fun! 
+Notes
+1. Every time "scenario_2.sh" is executed with "up" the IP addresses and Ports are randomized. Have fun! 
+2. This challenge is complex and requires understanding SSH Multiplexing. Use this link for help! https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing
 
