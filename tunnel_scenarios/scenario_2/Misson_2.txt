@@ -34,7 +34,7 @@ Misson Failure if:
 Instructions:
 1. Install docker engine and command line interface in Windows or Linux
    - https://docs.docker.com/engine/install/
-2. Execute the script "scenario_1.sh" with one of the following arguments:
+2. Execute the script "scenario_2.sh" with one of the following arguments:
    - up : Downloads and builds images, creates networks, and sets firewall rules for the environment on the local machine
    - down : Removes networks and containers from the local machine.
    
