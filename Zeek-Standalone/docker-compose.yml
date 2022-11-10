@@ -6,6 +6,4 @@ services:
     image: zeek 
     network_mode: "none"
     volumes:
-      - type: bind
-        source: ${PWD}
-        target: /root 
+      -.:/root/rw
