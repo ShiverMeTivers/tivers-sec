@@ -6,4 +6,4 @@ services:
     image: zeek 
     network_mode: "none"
     volumes:
-      -.:/root/rw
+      - .:/root:rw
