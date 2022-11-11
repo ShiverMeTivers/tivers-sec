@@ -10,7 +10,7 @@ services:
       - NET_ADMIN
     volumes:
       - type: bind
-        source: ${PWD}/logs
+        source: ./logs
         target: /opt/zeek/logs
         bind:
           create_host_path: true
