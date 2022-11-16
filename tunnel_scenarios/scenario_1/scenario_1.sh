@@ -23,13 +23,13 @@ up)
 	export ip6=$(( ($RANDOM % 249) + 4))
 	
 	#Rebuild Images with random ports
-	docker-compose build > /dev/null
+	docker compose build > /dev/null
 
 	#Flush DOCKER-USER Chains in iptables
 	iptables -F DOCKER-USER
 
 	#Bring up docker
-	docker-compose up -d > /dev/null
+	docker compose up -d > /dev/null
 
 	#Create iptables rules to segment the network
 	for i in $(seq 1 5); do
@@ -57,7 +57,7 @@ down)
 	echo "Bringing the scenario down"
 	
 	#Bring down Containers
-	docker-compose down
+	docker compose down
 	
 	#FLush Created Rules in OUTPUT CHAIN
 	iptables -F OUTPUT
