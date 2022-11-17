@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 #Ubuntu Baseline 
-FROM ubuntu:latest
+FROM ubuntu:20.04
 SHELL ["/bin/bash","-c"]
 RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 test
 RUN echo 'test:testpassword' | chpasswd
