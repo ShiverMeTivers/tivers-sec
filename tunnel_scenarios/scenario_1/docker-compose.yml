@@ -10,61 +10,69 @@ services:
     networks:
       tn1:
         ipv4_address: 172.16.1.2
+    ports:
+      - "2222:22"
+    hostname: pivot-1
 
   pivot-2:
     container_name: pivot-2
     build: 
       context: ./pivot/.
       args:
-        ports: ${P2PORT}
+        ports: 22
     image: pivot-2
     networks:
       tn2:
         ipv4_address: 172.16.2.${ip2}
+    hostname: pivot-2
 
   pivot-3:
     container_name: pivot-3
     build: 
       context: ./pivot/.
       args:
-        ports: ${P3PORT}
+        ports: 22
     image: pivot-3
     networks:
       tn3:
         ipv4_address: 172.16.3.${ip3}
+    hostname: pivot-3
 
   pivot-4:
     container_name: pivot-4
     build: 
       context: ./pivot/.
       args:
-        ports: ${P4PORT}
+        ports: 22
     image: pivot-4
     networks:
       tn4:
         ipv4_address: 172.16.4.${ip4}
+    hostname: pivot-4
 
   pivot-5:
     container_name: pivot-5
     build: 
       context: ./pivot/.
       args:
-        ports: ${P5PORT}
+        ports: 22
     image: pivot-5
     networks:
       tn5:
         ipv4_address: 172.16.5.${ip5}
+    hostname: pivot-5
 
   pivot-6:
     container_name: pivot-6
     build: 
       context: ./pivot/.
       args:
-        ports: ${P6PORT} 
+        ports: 22 
     image: pivot-6
     networks:
       tn6:
         ipv4_address: 172.16.6.${ip6}
+    hostname: pivot-6
 
 
 networks:

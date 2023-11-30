@@ -6,9 +6,7 @@ services:
       args:
         ports: 22
     container_name: pivot-1
-    environment:
-      - SSH_PORT=22
-    image: pivot:latest
+    image: pivot-1
     networks:
       tn1:
         ipv4_address: 172.16.1.2
@@ -17,9 +15,9 @@ services:
     container_name: pivot-2
     build: 
       context: ./pivot/.
-    environment:
-      - SSH_PORT=${P2PORT}
-    image: pivot:latest
+      args:
+        ports: ${P2PORT}
+    image: pivot-2
     networks:
       tn2:
         ipv4_address: 172.16.2.${ip2}
@@ -28,66 +26,20 @@ services:
     container_name: pivot-3
     build: 
       context: ./pivot/.
-    environment:
-      - SSH_PORT=${P3PORT}
-    image: pivot:latest
+      args:
+        ports: ${P3PORT}
+    image: pivot-3
     networks:
       tn3:
         ipv4_address: 172.16.3.${ip3}
-    volumes:
-        - "./pivot/limits.conf:/etc/security/limits.conf"
-
-  target-1:
-    container_name: target-1
-    build: 
-      context: ./target/.
-    environment:
-      - SSH_PORT=${tgt1port}
-    image: target:latest
-    networks:
-      tn3:
-        ipv4_address: 172.16.3.${tgt1}
-
-  target-2:
-    container_name: target-2
-    build: 
-      context: ./target/.
-    environment:
-      - SSH_PORT=${tgt2port}
-    image: target:latest
-    networks:
-      tn3:
-        ipv4_address: 172.16.3.${tgt2}
-
-  target-3:
-    container_name: target-3
-    build: 
-      context: ./target/.
-    environment:
-      - SSH_PORT=${tgt2port}
-    image: target:latest
-    networks:
-      tn3:
-        ipv4_address: 172.16.3.${tgt3}
-
-  target-4:
-    container_name: target-4
-    build: 
-      context: ./target/.
-    environment:
-      - SSH_PORT=${tgt4port}
-    image: target:latest
-    networks:
-      tn3:
-        ipv4_address: 172.16.3.${tgt4}
 
   pivot-4:
     container_name: pivot-4
     build: 
       context: ./pivot/.
-    environment:
-      - SSH_PORT=${P4PORT}
-    image: pivot:latest
+      args:
+        ports: ${P4PORT}
+    image: pivot-4
     networks:
       tn4:
         ipv4_address: 172.16.4.${ip4}
@@ -96,48 +48,23 @@ services:
     container_name: pivot-5
     build: 
       context: ./pivot/.
-    environment:
-      - SSH_PORT=${P5PORT}
-    image: pivot:latest
+      args:
+        ports: ${P5PORT}
+    image: pivot-5
     networks:
       tn5:
         ipv4_address: 172.16.5.${ip5}
-    volumes:
-        - "./pivot/limits.conf:/etc/security/limits.conf"
 
-  target-5:
-    container_name: target-5
+  pivot-6:
+    container_name: pivot-6
     build: 
-      context: ./target/.
-    environment:
-      - SSH_PORT=${tgt5port}
-    image: target:latest
+      context: ./pivot/.
+      args:
+        ports: ${P6PORT} 
+    image: pivot-6
     networks:
-      tn5:
-        ipv4_address: 172.16.5.${tgt5}
-
-  target-6:
-    container_name: target-6
-    build: 
-      context: ./target/.
-    environment:
-      - SSH_PORT=${tgt6port}
-    image: target:latest
-    networks:
-      tn5:
-        ipv4_address: 172.16.5.${tgt6}
-
-  target-7:
-    container_name: target-7
-    build: 
-      context: ./target/.
-    environment:
-      - SSH_PORT=${tgt7port}
-    image: target:latest
-    networks:
-      tn5:
-        ipv4_address: 172.16.5.${tgt7}
-
+      tn6:
+        ipv4_address: 172.16.6.${ip6}
 
 
 networks:
@@ -177,3 +104,11 @@ networks:
       driver : default
       config:
         - subnet: 172.16.5.0/24
+
+  tn6:
+    driver: bridge
+    ipam:
+      driver : default
+      config:
+        - subnet: 172.16.6.0/24
+

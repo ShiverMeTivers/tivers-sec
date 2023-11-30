@@ -28,5 +28,5 @@ Instructions:
    - up : Downloads and builds images, creates networks, and sets firewall rules for the environment on the local machine
    - down : Removes networks and containers from the local machine.
    
-Note: Every time "scenario_1.sh" is executed with "up" the IP addresses and Ports are randomized. Have fun! 
-
+Note: Every time "scenario_1.sh" is executed with "up" the last octet of each IP address is randomized. Have fun! 
+Note: Container auth.logs are available with "docker compose logs -f" in intervals of 30 seconds.

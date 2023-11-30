@@ -7,21 +7,11 @@ RUN echo 'test:testpassword' | chpasswd
 RUN apt update && apt install openssh-server sudo -y 
 RUN apt install iproute2 net-tools rsyslog -y
 RUN apt install iputils-ping -y
-#Infinite process to keep container running. It starts sshd as a service and pauses.
 ARG ports
-RUN sed -i "s/#Port 22/Port $ports/g" /etc/ssh/sshd_config
-ARG hostname
-RUN echo $hostname > /etc/hostname
-RUN echo -e '#!/bin/bash\n \
-service rsyslog reload\n\n \
-service rsyslog start\n\n \
-service ssh start\n \
-while true; do\n \
-  cat /var/log/auth.log | tee /var/log/auth.log.bak  && echo "" > /var/log/auth.log\n \
-  sleep 30\n \
-done' > /root/startup.sh \
+#RUN sed -i "s/#Port 22/Port $ports/g" /etc/ssh/sshd_config
+#Infinite process to keep container running. It starts sshd as a service and pauses.
+RUN echo -e '#!/bin/bash\nsed -i "s/#Port 22/Port ${SSH_PORT}/g" /etc/ssh/sshd_config\nservice rsyslog start\n\nservice ssh start\nwhile true; do\n sleep 60\ndone' > /root/startup.sh \
     && chmod ug+x /root/startup.sh
-RUN echo "Hello"
 
 #Runs the script to start the machine
 #ENTRYPOINT ["service", "ssh", "start"]
