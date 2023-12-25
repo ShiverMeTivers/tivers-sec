@@ -1,0 +1,122 @@
+name: "sc4"
+
+services:
+  rdr-00:
+    build: 
+      context: ./pivot/.
+      args:
+        ports: 22   
+    image: pivot-default
+    #container_name: redirector-0
+    hostname: rdr.targetspace
+    ports:
+      - "2222:22"
+    networks:
+      - tn1
+
+  p-01:
+    image: pivot-default
+    hostname: p1.targetspace
+    networks:
+      - tn1
+      
+  p-02:
+    image: pivot-default
+    hostname: p2.targetspace
+    networks:
+      - tn1
+      
+  p-03:
+    image: pivot-default
+    hostname: p3.targetspace
+    networks:
+      - tn2
+      
+  p-04:
+    image: pivot-default
+    hostname: p4.targetspace
+    networks:
+      - tn2
+      
+  p-05:
+    image: pivot-default
+    hostname: p5.targetspace
+    networks:
+      - tn2
+      
+  p-06:
+    image: pivot-default
+    hostname: p6.targetspace
+    networks:
+      - tn3
+      
+  p-07:
+    image: pivot-default
+    hostname: p7.targetspace
+    networks:
+      - tn3
+      
+  p-08:
+    image: pivot-default
+    hostname: p8.targetspace
+    networks:
+      - tn3
+      
+  p-09:
+    image: pivot-default
+    hostname: p9.targetspace
+    networks:
+      - tn4
+      
+  p-10:
+    image: pivot-default
+    hostname: p10.targetspace
+    networks:
+      - tn4
+      
+  tgt-11:
+    image: pivot-default
+    hostname: tgt.targetspace
+    networks:
+      - tn4
+
+networks:
+  tn1:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+    name: tn1
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24
+        
+  tn2:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+    name: tn2
+    ipam:
+      config:
+        - subnet: 172.16.50.0/24
+      
+  tn3:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+    name: tn3
+    ipam:
+      driver : default
+      config:
+        - subnet: 172.16.100.0/24  
+          
+  tn4:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+    name: tn4
+    ipam:
+      driver : default
+      config:
+        - subnet: 172.16.150.0/24
+
+
