@@ -4,15 +4,22 @@ RUN apt-get update && apt-get install cmake make gcc g++ flex bison libpcap-dev 
 RUN echo 'deb http://download.opensuse.org/repositories/security:/zeek/xUbuntu_20.04/ /' | tee /etc/apt/sources.list.d/security:zeek.list
 RUN curl -fsSL https://download.opensuse.org/repositories/security:zeek/xUbuntu_20.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/security_zeek.gpg > /dev/null
 RUN apt update
+
 #Workaround to get past required user input. Prints 3 blank new-lines.
 RUN printf "n\nn\nn" | apt install dma -y
 RUN apt install zeek iproute2 tcpdump -y
 
+#Remove policy which loads everything
+RUN rm /opt/zeek/share/zeek/test-all-policy.zeek
+
+#Set working directory
 WORKDIR /opt/zeek/logs/
 SHELL ["/bin/bash","-c"]
-ENTRYPOINT /opt/zeek/bin/zeek -C -i ${INTERFACE} local ${ZEEKARGS1} ${ZEEKARGS2} ${ZEEKARGS3} ${ZEEKARGS4}
+ENTRYPOINT /opt/zeek/bin/zeek -b -C -i ${INTERFACE}  ${ZEEKARGS1} ${ZEEKARGS2} ${ZEEKARGS3} ${ZEEKARGS4}
 
-#Debugging  only. 
+#Debugging  only. Loads all zeek scripts.
+#ENTRYPOINT /opt/zeek/bin/zeek -C -i ${INTERFACE} local  ${ZEEKARGS1} ${ZEEKARGS2} ${ZEEKARGS3} ${ZEEKARGS4}
+
 #Use 'docker exec -it <container name> /bin/bash' to get a terminal in the container.
 #Comment out the other ENTRYPOINT entry
 #ENTRYPOINT ["top", "-b", "-c"]

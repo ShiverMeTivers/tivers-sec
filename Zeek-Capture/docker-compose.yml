@@ -2,7 +2,7 @@ version: "3.4"
 services:
   zeek-capture:
     container_name: zeek-capture
-    build: ./zeek_capture_host/. 
+    build: . 
     image: zeek-capture
     env_file: zeek_capture.env
     network_mode: "host"
@@ -14,4 +14,12 @@ services:
         target: /opt/zeek/logs
         bind:
           create_host_path: true
+      - type: bind
+        source: ./config/custom.zeek
+        target: /opt/zeek/share/zeek/custom.zeek
+        bind:
+          create_host_path: true
+
+
+
 
